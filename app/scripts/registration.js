@@ -1,3 +1,5 @@
+var jsSHA = require('./jsSHA.js');
+
 //キャプチャ設定
 var reCaptchaWidget;
 var onloadCallback = function() {

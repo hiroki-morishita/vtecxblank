@@ -1,3 +1,5 @@
+var jsSHA = require('./jsSHA.js');
+
 $(function(){
 
 	// 新規アカウント登録
