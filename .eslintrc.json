@@ -12,8 +12,9 @@
         },
         "sourceType": "module"
     },
+    "parser": "babel-eslint",
     "plugins": [
-        "react"
+        "flowtype"
     ],
     "rules": {
         "indent": [
@@ -31,6 +32,8 @@
         "semi": [
             "error",
             "never"
-        ]
+        ],
+	"no-mixed-spaces-and-tabs": 0,
+        "no-console":0
     }
 }
