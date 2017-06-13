@@ -148,3 +148,5 @@ function CompletedForm() {
 }
 
 ReactDOM.render(<ForgotPassword />, document.getElementById('forgotPassword_form'))
+
+
