@@ -24,7 +24,7 @@ class Sidebar extends React.Component {
       		{ this.props.children }
 				</Modal.Body>
 			</Modal>
-		)
+	)
 	}
 }
 
@@ -72,7 +72,7 @@ class SidebarItems extends React.Component {
 					</Nav>
 				</Sidebar>
 			</div>
-		)
+	)
 	}
 }
 
