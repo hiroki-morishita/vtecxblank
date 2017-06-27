@@ -128,5 +128,3 @@ class ForgotPassword extends React.Component {
 }
 
 ReactDOM.render(<ForgotPassword />, document.getElementById('forgotPassword_form'))
-
-

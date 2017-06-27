@@ -117,4 +117,3 @@ class LoginForm extends React.Component {
 }
 
 ReactDOM.render(<LoginForm />, document.getElementById('container'))
-

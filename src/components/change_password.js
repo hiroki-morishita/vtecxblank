@@ -169,6 +169,9 @@ class ChangePassword extends React.Component {
 	}
 }
 
+<<<<<<< HEAD:src/components/change_password.js
+ReactDOM.render(<ChangePassword />, document.getElementById('changepassword_form'))
+=======
 <<<<<<< HEAD
 ReactDOM.render(<ChangePassword />, document.getElementById('changepassword_form'))
 =======
@@ -278,3 +281,4 @@ function CompletedForm() {
 
 ReactDOM.render(<ChangePassword />, document.getElementById('changepassword_form'))
 >>>>>>> 31df065e8eedc12a050a50848a69797fff510405
+>>>>>>> 57f6cb849ae33dfb0f55ff67610e2b7f885f1020:app/scripts/change_password.js

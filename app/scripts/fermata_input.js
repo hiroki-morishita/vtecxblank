@@ -105,6 +105,17 @@ class Input extends React.Component {
         
 				<FormGroup controlId="publication">
 					<Col xs={10}sm={10}md={10}lg={10}xl={10}>
+<<<<<<< HEAD
+						<Radio name="media" value="series" >ドラマ(連続)</Radio>
+						<Radio name="media" value="short">ドラマ(単発)</Radio>
+						<Radio name="media" value="web">WEB</Radio>
+						<Radio name="media" value="variety">バラエティー</Radio>
+						<Radio name="media" value="movie">映画</Radio>
+						<Radio name="media" value="newsprogram">情報・報道番組</Radio>
+						<Radio name="media" value="magazine">雑誌</Radio>
+						<Radio name="media" value="cm">CM</Radio>
+						<Radio name="media" value="other">その他</Radio>
+=======
 						<Radio name="media" value="series" inline>ドラマ(連続)</Radio>
 						<Radio name="media" value="short" inline>ドラマ(単発)</Radio>
 						<Radio name="media" value="web" inline>WEB</Radio>
@@ -115,6 +126,7 @@ class Input extends React.Component {
 						<Radio name="media" value="magazine" inline>雑誌</Radio>
 						<Radio name="media" value="cm" inline>CM</Radio>
 						<Radio name="media" value="other" >その他</Radio>
+>>>>>>> 57f6cb849ae33dfb0f55ff67610e2b7f885f1020
 						<FormControl type="text" placeholder="その他" />
 					</Col>
 				</FormGroup>
