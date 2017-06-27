@@ -169,4 +169,116 @@ class ChangePassword extends React.Component {
 	}
 }
 
+<<<<<<< HEAD:src/components/change_password.js
 ReactDOM.render(<ChangePassword />, document.getElementById('changepassword_form'))
+=======
+<<<<<<< HEAD
+ReactDOM.render(<ChangePassword />, document.getElementById('changepassword_form'))
+=======
+ChangePasswordForm.propTypes = {
+	onSubmit: PropTypes.func,
+	capchaOnChange: PropTypes.func,  
+	isIllegalPassword: PropTypes.boolean,
+	isUnmatchReinput: PropTypes.boolean,
+	isForbidden: PropTypes.boolean,
+	isError: PropTypes.boolean
+}
+
+function ChangePasswordForm(props) {
+	return (
+      <Form horizontal onSubmit={props.onSubmit}>
+        <h2>パスワード変更</h2>
+        <hr />
+        <FormGroup controlId="password">
+          <Col sm={12}>
+            <FormControl type="password" placeholder="パスワード" />
+            <HelpBlock>（8文字以上、かつ数字・英字・記号を最低1文字含む）</HelpBlock>
+          </Col>
+        </FormGroup>
+
+        <FormGroup controlId="re_password">
+          <Col sm={12}>
+            <FormControl type="password" placeholder="パスワード確認" />
+          </Col>
+        </FormGroup>
+ 
+        <FormGroup>
+          <Col smOffset={1} sm={12}>
+            <ReCAPTCHA
+              sitekey="6LfBHw4TAAAAAMEuU6A9BilyPTM8cadWST45cV19"
+              onChange={props.capchaOnChange}
+            />
+          </Col>
+        </FormGroup>
+
+        <FormGroup>
+          <Col smOffset={3} sm={12}>
+            <Button type="submit" className="btn btn-primary">
+              パスワード変更実行
+            </Button>
+          </Col>
+        </FormGroup>
+
+        { props.isIllegalPassword &&
+        <FormGroup>
+          <Col sm={12}>
+            <div className="alert alert-danger">
+              パスワードは8文字以上、かつ数字・英字・記号を最低1文字含む必要があります。
+            </div>
+          </Col>
+        </FormGroup>
+        }
+
+        { props.isUnmatchReinput &&
+        <FormGroup>
+          <Col sm={12}>
+            <div className="alert alert-danger">
+      				入力されたパスワードが不正です。確認用パスワードと一致していない可能性があります。
+            </div>
+          </Col>
+        </FormGroup>
+        }
+
+        { props.isForbidden &&
+        <FormGroup>
+          <Col sm={12}>
+            <div className="alert alert-danger">
+              <a href="login.html">ログイン</a>を行ってから実行してください。
+            </div>
+          </Col>
+        </FormGroup>
+        }
+
+        { props.isError &&
+        <FormGroup>
+          <Col sm={12}>
+            <div className="alert alert-danger">
+      				パスワード変更に失敗しました。
+            </div>
+          </Col>
+        </FormGroup>
+        }
+      </Form>
+	)
+}
+
+function CompletedForm() {
+	return (
+      <Form>
+          <h2>パスワード変更を完了しました</h2>
+          <hr />
+          <FormGroup>
+            <Col sm={12}>
+              <div className="caution">
+                入力したパスワードに変更完了しました。<br />
+                もう一度<a href="login.html">ログイン</a>を行ってください。
+              </div>
+            </Col>
+          </FormGroup>
+      </Form>
+	)
+}
+
+ReactDOM.render(<ChangePassword />, document.getElementById('changepassword_form'))
+>>>>>>> 31df065e8eedc12a050a50848a69797fff510405
+>>>>>>> 57f6cb849ae33dfb0f55ff67610e2b7f885f1020:app/scripts/change_password.js
