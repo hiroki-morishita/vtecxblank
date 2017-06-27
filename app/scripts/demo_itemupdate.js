@@ -26,7 +26,18 @@ export default class ItemUpdate extends React.Component {
 	
 	constructor(props:Props) {
 		super(props)
-		this.state = { feed: {},id:0,email:'',food:'',music:'',isCompleted: false, isDeleted:false,isError: false, errmsg: '', isForbidden: false } 
+		this.state = {
+			feed: {},
+			id: 0,
+			email: '',
+			food: '',
+			music: '',
+			isCompleted: false,
+			isDeleted: false,
+			isError: false,
+			errmsg: '',
+			isForbidden: false
+		} 
 		this.entrykey
 	}
  
@@ -36,9 +47,9 @@ export default class ItemUpdate extends React.Component {
 
 	initValue() {
 		this.setState({
-			id: this.state.feed.entry ? this.state.feed.entry[0].userinfo.id : 0,
+			id:    this.state.feed.entry ? this.state.feed.entry[0].userinfo.id : 0,
 			email: this.state.feed.entry ? this.state.feed.entry[0].userinfo.email : '',
-			food: this.state.feed.entry ? this.state.feed.entry[0].favorite.food : '',
+			food:  this.state.feed.entry ? this.state.feed.entry[0].favorite.food : '',
 			music: this.state.feed.entry ? this.state.feed.entry[0].favorite.music : ''
 		})
 
@@ -54,12 +65,11 @@ export default class ItemUpdate extends React.Component {
 				}
 			)
 		}
-			
-
 	}
 
 	componentWillMount() {
 		this.entrykey = location.search.substring(1)
+		console.log(this.entrykey)
 		axios({
 			url: '/d/registration/'+this.entrykey+'?e',
 			method: 'get',
@@ -109,8 +119,14 @@ export default class ItemUpdate extends React.Component {
 		entry.link = this.state.feed.entry ? this.state.feed.entry[0].link : ''
 		// idを指定すると楽観的排他チェックができる。,の右の数字がリビジョン(更新回数)
 		//		entry.id = this.state.feed.entry[0].id
-		entry.userinfo = { id : Number(e.target.id.value), email : e.target.email.value }
-		entry.favorite = { food : e.target.food.value, music : e.target.music.value }
+		entry.userinfo = {
+			id: Number(e.target.id.value),
+			email: e.target.email.value
+		}
+		entry.favorite = {
+			food: e.target.food.value,
+			music: e.target.music.value
+		}
 
 		entry.hobby = []
 
@@ -229,7 +245,8 @@ export default class ItemUpdate extends React.Component {
 										<th>名前</th>
 									</tr>
 								</thead>
-								{this.state.feed.entry&&this.state.feed.entry[0].hobby&&this.state.feed.entry[0].hobby.map((row, key) => this.HobbyForm(key))}
+								{this.state.feed.entry && this.state.feed.entry[0].hobby &&
+									this.state.feed.entry[0].hobby.map((row, key) => this.HobbyForm(key))}
       						</table>
 
 							<FormGroup>

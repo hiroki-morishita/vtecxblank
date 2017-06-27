@@ -18,6 +18,7 @@ import type {
 	InputEvent
 } from 'demo.types'
 
+
 class DemoContainer extends React.Component {
 	constructor(props) {
 		super(props)
