@@ -16,13 +16,17 @@ const tap = require('gulp-tap');
 const BabiliPlugin = require('babili-webpack-plugin');
 const recursive = require('recursive-readdir');
 
-gulp.task('watch:scripts', function(){
-  gulp.watch('./app/scripts/*.js')
+gulp.task('watch:components', function(){
+  gulp.watch('./src/components/*.js')
   .on('change', function(changedFile) {
-    gulp.src(changedFile.path)
+    let srcfile = changedFile.path
+    if (argv.f) {
+      srcfile = './src/components/'+ argv.f
+    }
+    gulp.src(srcfile)
     .pipe(webpackStream({
       output: {
-          filename: changedFile.path.replace(/^.*[\\\/]/, '')
+          filename: srcfile.replace(/^.*[\\\/]/, '')
         },
         module: {
             rules: [
@@ -68,18 +72,22 @@ gulp.task('watch:scripts', function(){
       }
       ,webpack))
       .on('error', gutil.log)
-    .pipe(gulp.dest('./dist/scripts'))
+    .pipe(gulp.dest('./dist/components'))
     .on('end',function(){
       if (argv.k) {
-        const filename = 'dist/scripts/'+changedFile.path.replace(/^.*[\\\/]/, '').match(/(.*)(?:\.([^.]+$))/)[1]+'.js';
-        sendcontent(filename);
+        const p = changedFile.path.match(/(.*)(?:\.([^.]+$))/);
+        if (p&&p[2]!=='map') {
+          const filename = 'dist/components/'+srcfile.replace(/^.*[\\\/]/, '').match(/(.*)(?:\.([^.]+$))/)[1]+'.js';
+          sendcontent(filename);
+        }        
       }
     })
   });
 });
 
+
 gulp.task('watch:html', function(){
-  gulp.watch('./app/*.html')
+  gulp.watch('./src/*.html')
   .on('change', function(changedFile) {
 	gutil.log('copied:'+changedFile.path.replace(/^.*[\\\/]/, ''));
     gulp.src(changedFile.path)
@@ -160,17 +168,17 @@ function webpack_file(filename,src,dest) {
 		        plugins: [
                 new BabiliPlugin()		          
 		        ]
-		        ,devtool: 'source-map'
+//		        ,devtool: 'source-map'
 		      }
 	      ,webpack))
 	      .pipe(gulp.dest(dest))
 }
 
-gulp.task('build:html_scripts',['symlink'], function(done){
-  gulp.src('./app/*.html')
+gulp.task('build:html_components',['copy:pdf','copy:xls'], function(done){
+  gulp.src('./src/*.html')
       .pipe(minifyHtml({ empty: true }))
       .pipe(gulp.dest('./dist'))
-      .pipe(webpack_files('./app/scripts','./dist/scripts',done));
+      .pipe(webpack_files('./src/components','./dist/components',done));
 });
 
 gulp.task('upload:content', function(){
@@ -249,12 +257,16 @@ function gettype(file) {
 }
 
 gulp.task('watch:server', function(){
-  gulp.watch('./app/server/*.js')
+  gulp.watch('./src/server/*.js')
   .on('change', function(changedFile) {
-    gulp.src(changedFile.path)
+    let srcfile = changedFile.path
+    if (argv.f) {
+      srcfile = './src/server/'+ argv.f
+    }
+    gulp.src(srcfile)
     .pipe(webpackStream({
       output: {
-          filename: changedFile.path.replace(/^.*[\\\/]/, '')
+          filename: srcfile.replace(/^.*[\\\/]/, '')
         },
         module: {
             rules: [
@@ -275,7 +287,7 @@ gulp.task('watch:server', function(){
             ]
         }
         ,plugins: [
-            new BabiliPlugin()              
+//            new BabiliPlugin()              
         ]
         ,devtool: 'source-map'        
       }
@@ -284,8 +296,11 @@ gulp.task('watch:server', function(){
       .pipe(gulp.dest('./test/server'))
       .on('end',function(){
       if (argv.k) {
-        const filename = 'test/server/'+changedFile.path.replace(/^.*[\\\/]/, '').match(/(.*)(?:\.([^.]+$))/)[1]+'.js';
-        sendcontent(filename);
+        const p = changedFile.path.match(/(.*)(?:\.([^.]+$))/);
+        if (p&&p[2]!=='map') {
+          const filename = 'test/server/'+srcfile.replace(/^.*[\\\/]/, '').match(/(.*)(?:\.([^.]+$))/)[1]+'.js';
+          sendcontent(filename);
+        }        
       }
     });
   });
@@ -293,12 +308,12 @@ gulp.task('watch:server', function(){
 
 gulp.task('build:server_dist', function(done){
   gulp.src('./test/*.html')
-      .pipe(webpack_files('./app/server','./dist/server',done));      
+      .pipe(webpack_files('./src/server','./dist/server',done));      
 });
 
 gulp.task('build:server_test', function(done){
   gulp.src('./test/*.html')
-      .pipe(webpack_files('./app/server','./test/server',done));      
+      .pipe(webpack_files('./src/server','./test/server',done));      
 });
 
 gulp.task('build:server', function ( callback ) {
@@ -307,24 +322,36 @@ gulp.task('build:server', function ( callback ) {
 
 gulp.task( 'copy:images', function() {
     return gulp.src(
-        [ 'app/img/**' ],
-        { base: 'app' }
+        [ 'src/img/**' ],
+        { base: 'src' }
     ).pipe( imagemin() ) 
     .pipe( gulp.dest( 'dist' ) );
 } );
 
+gulp.task( 'copy:pdf', function() {
+    return gulp.src(
+        [ 'src/pdf/**' ],
+        { base: 'src' }
+    ).pipe( gulp.dest( 'dist' ) );
+} );
+
+gulp.task( 'copy:xls', function() {
+    return gulp.src(
+        [ 'src/xls/**' ],
+        { base: 'src' }
+    ).pipe( gulp.dest( 'dist' ) );
+} );
+
 gulp.task('symlink', function () {
-    vfs.src('app/pdf',{followSymlinks: false})
-    	.pipe(vfs.symlink('dist'));
-    vfs.src('app/xls',{followSymlinks: false})
-    	.pipe(vfs.symlink('dist'));
-});
+     vfs.src('dist/server',{followSymlinks: false})
+       .pipe(vfs.symlink('test'));
+ });
 
 gulp.task('serve', ['watch'],function() {
 	return serve('dist');
 });
 
-gulp.task('serve:server', ['watch:server'],function() {
+gulp.task('serve:server', ['symlink','watch:server'],function() {
 	return serve('test');
 });
 
@@ -362,23 +389,23 @@ function serve(tgt) {
 gulp.task('clean-dist', function () {
     return gulp.src([
         'dist/{,**/}*.html', // 対象ファイル
-        'dist/scripts',
+        'dist/components',
         'dist/server',
-        'dist/img',
-        'app/build/*.js',
-        'app/build/server/*.js'
+        'dist/pdf',
+        'dist/xls',
+        'dist/img'
     ], {read: false} )
     .pipe(clean());
 });
 
 gulp.task('build:client', function ( callback ) {
-  runSequence('clean-dist',['build:html_scripts','copy:images']);
+  runSequence('clean-dist',['build:html_components','copy:images']);
 }); 
 gulp.task('build', function ( callback ) {
-  runSequence('clean-dist',['build:html_scripts','copy:images'],['build:server_dist','build:server_test']);
+  runSequence('clean-dist',['build:html_components','copy:images'],['build:server_dist','build:server_test']);
 }); 
 gulp.task('deploy', function ( callback ) {
-  runSequence('clean-dist',['build:html_scripts','copy:images'],'build:server_dist','upload');
+  runSequence('clean-dist',['build:html_components','copy:images'],'build:server_dist','upload');
 }); 
 
 gulp.task('deploy:server', function ( callback ) {
@@ -387,8 +414,8 @@ gulp.task('deploy:server', function ( callback ) {
 
 gulp.task('upload', ['upload:content','upload:entry']);
 
-gulp.task('watch', ['watch:scripts','watch:html']);
+gulp.task('watch', ['watch:components','watch:html']);
 
 gulp.task('default', function ( callback ) {
-  runSequence('build:html_scripts','watch',callback);
+  runSequence('build',callback);
 }); 
