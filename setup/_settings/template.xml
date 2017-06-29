@@ -18,6 +18,39 @@ hobby{}
  type
  name
  updated(date)
+bill
+ date_of_rent(date)
+ lender
+ lender_tel
+ publication
+  type
+   drama_series(boolean)　
+   drama_short(boolean)
+   web(boolean)
+   variety(boolean)
+   movie(boolean)
+   newsprogram(boolean)
+   magazine(boolean)
+   cm(boolean)
+   other
+  publisher_name
+  program_name
+  release_date(date)
+  is_credit(boolean)
+  prospective_user
+  return_date
+   part(date)
+   final(date)
+ items{}
+  brand_name
+  item_no
+  item_name
+  usage_situation
+  return_date
+ credit_paid(boolean)
+ return_completion
+ notices
+ responsible_person
 </content>
 <rights>
 userinfo.id:/.+/registration

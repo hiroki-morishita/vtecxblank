@@ -1,0 +1,88 @@
+type Bill = {
+		  date_of_rent: string,
+		  		lender: string,
+			lender_tel: number,
+		   credit_paid: boolean,
+	 return_completion: string,
+			   notices: string,
+	responsible_person: string
+}
+
+type Publication = {
+		drama_series: boolean,
+	 	 drama_short: boolean,
+				 web: boolean,
+		 	 variety: boolean,
+		   	   movie: boolean,
+	 	 newsprogram: boolean
+			magazine: boolean,
+			      cm: boolean,
+		       other: any,
+	  publisher_name: string,
+	    program_name: string,
+	    release_date: string,
+		   is_credit: boolean,
+	prospective_user: string
+}
+
+type Return_date = {
+	 part: string,
+	final: string
+}
+
+type Items = {
+		brand_name: string,
+	   	   item_no: number,
+	 	 item_name: string,
+	usagesituation: string,
+	   return_date: string
+}
+
+type Entry = {
+	bill: Bill,
+	publication: Publication,
+	return_date: Return_date,
+	items?: Array<Items>, 
+	link: Array<Link>,
+	id?: string
+}
+
+type Entries2 = {
+	entry2? : Array<Entry2>
+}
+
+export type State = {
+				  feed: Entries,
+		  date_of_rent: string,
+				lender: string,
+			lender_tel: string,
+		publisher_name: string,
+		  program_name: string,
+		  release_date: string,
+			 is_credit: boolean,
+	  prospective_user: string,
+		   credit_paid: boolean,
+	 return_completion: string,
+			   notices: string,
+	responsible_person: string,
+		   isCompleted: boolean,
+	  		 isDeleted: boolean,
+			   isError: boolean,
+		 		errmsg: string,
+		   isForbidden: boolean
+}
+
+
+type Target = {
+		id: Value,
+	 email: Value,
+	  food: Value,
+	 music: Value,
+	  name: string,
+	 value: string
+}
+
+export type InputEvent = {
+	target: Target,
+	preventDefault: Function
+} 

@@ -53,7 +53,6 @@ export default class ItemUpdate extends React.Component {
 			music: this.state.feed.entry ? this.state.feed.entry[0].favorite.music : ''
 		})
 
-<<<<<<< HEAD:src/components/demo_itemupdate.js
 		this.state.feed.entry[0].hobby.map(
 			(hobby,i) => {
 				const hobby_type = 'hobby_type' + i
@@ -65,20 +64,6 @@ export default class ItemUpdate extends React.Component {
 			}
 		)
 
-=======
-		if (this.state.feed.entry && this.state.feed.entry[0]&&this.state.feed.entry[0].hobby) {
-			this.state.feed.entry[0].hobby.map(
-				(hobby,i) => {
-					const hobby_type = 'hobby_type' + i
-					const hobby_name = 'hobby_name' + i
-					this.setState({
-						[hobby_type]: hobby.type,
-						[hobby_name]: hobby.name					
-					})
-				}
-			)
-		}
->>>>>>> 57f6cb849ae33dfb0f55ff67610e2b7f885f1020:app/scripts/demo_itemupdate.js
 	}
 
 	componentWillMount() {
