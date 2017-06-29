@@ -14,7 +14,7 @@
             <uri>urn:vte.cx:acl:/_group/$admin,CRUD</uri>
         </contributor>
         <contributor>
-            <!-- cssを制限なく閲覧できるようにするACL設定(*)  -->
+            <!-- cssを制限なく閲覧できるようにするACL設定(*) -->
             <uri>urn:vte.cx:acl:*,R./</uri>
         </contributor>
         <link rel="self" href="/_html/css" />
@@ -55,9 +55,29 @@
         </contributor>
         <contributor>
             <!-- serverをログイン済みユーザのみ閲覧できるようにするACL設定(+)  -->
-            <uri>urn:vte.cx:acl:+,R.</uri>
+            <uri>urn:vte.cx:acl:+,R./</uri>
         </contributor>
         <link rel="self" href="/_html/server" />
+    </entry>
+    <entry>
+        <contributor>
+            <uri>urn:vte.cx:acl:/_group/$admin,CRUD</uri>
+        </contributor>
+        <contributor>
+            <!-- ssr.html.jsを誰でも閲覧できるようにするACL設定(*)  -->
+            <uri>urn:vte.cx:acl:*,R.</uri>
+        </contributor>
+        <link rel="self" href="/_html/server/ssr.html.js" />
+    </entry>
+    <entry>
+        <contributor>
+            <uri>urn:vte.cx:acl:/_group/$admin,CRUD</uri>
+        </contributor>
+        <contributor>
+            <!-- ssr.pdf.jsを誰でも閲覧できるようにするACL設定(*)  -->
+            <uri>urn:vte.cx:acl:*,R.</uri>
+        </contributor>
+        <link rel="self" href="/_html/server/ssr.pdf.js" />
     </entry>
     <entry>
         <contributor>
