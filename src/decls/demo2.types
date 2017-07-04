@@ -17,7 +17,9 @@ type Publication = {
 	 	 newsprogram: boolean
 			magazine: boolean,
 			      cm: boolean,
-		       other: any,
+		       other: boolean,
+       other_notices: string,
+
 	  publisher_name: string,
 	    program_name: string,
 	    release_date: string,
@@ -38,33 +40,56 @@ type Items = {
 	   return_date: string
 }
 
-type Entry = {
-	bill: Bill,
-	publication: Publication,
-	return_date: Return_date,
-	items?: Array<Items>, 
-	link: Array<Link>,
-	id?: string
+type Link = {
+	self: string,
+	href: string
 }
 
-type Entries2 = {
-	entry2? : Array<Entry2>
+type Entry = {
+	       bill?: Bill,
+	publication?: Publication,
+	return_date?: Return_date,
+	     items?: Array<Items>, 
+	       link: Array<Link>,
+	        id?: string
+}
+
+type Entries = {
+	entry? : Array<Entry>
 }
 
 export type State = {
 				  feed: Entries,
+
 		  date_of_rent: string,
 				lender: string,
 			lender_tel: string,
+        
+          drama_series: boolean,
+           drama_short: boolean,
+                   web: boolean,
+               variety: boolean,
+                 movie: boolean,
+           newsprogram: boolean,
+              magazine: boolean,
+                    cm: boolean,
+                 other: boolean,
+         other_notices: string,
+        　  
 		publisher_name: string,
 		  program_name: string,
 		  release_date: string,
-			 is_credit: boolean,
+		 is_credit_use: boolean,
+      is_credit_unUsed: boolean,
 	  prospective_user: string,
+      return_date_part: string,
+     return_date_final: string,
 		   credit_paid: boolean,
+         credit_unPaid: boolean,
 	 return_completion: string,
 			   notices: string,
 	responsible_person: string,
+
 		   isCompleted: boolean,
 	  		 isDeleted: boolean,
 			   isError: boolean,
@@ -72,6 +97,13 @@ export type State = {
 		   isForbidden: boolean
 }
 
+export type Props = {
+	hideSidemenu: Function
+}
+
+type Value = {
+	value: string
+}
 
 type Target = {
 		id: Value,

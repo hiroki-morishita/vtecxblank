@@ -40,7 +40,8 @@ export default class ItemUpdate extends React.Component {
 		} 
 		this.entrykey
 	}
- 
+
+	
 	static propTypes = {
 		hideSidemenu: PropTypes.func
 	}
@@ -64,6 +65,7 @@ export default class ItemUpdate extends React.Component {
 			}
 		)
 
+		
 	}
 
 	componentWillMount() {
@@ -129,6 +131,7 @@ export default class ItemUpdate extends React.Component {
 
 		entry.hobby = []
 
+		
 		this.state.feed.entry[0].hobby.map((row,key) => 
 			entry.hobby.push({'type': e.target['hobby_type'+key].value, 'name': e.target['hobby_name'+key].value})
 		)
