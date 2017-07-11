@@ -95,7 +95,7 @@ gulp.task('watch:html', function(){
       .pipe(gulp.dest('./dist'))
       .on('end',function(){
       if (argv.k) {
-        const filename = 'dist/'+changedFile.path.replace(/^.*[\\\/]/, '').match(/(.*)(?:\.([^.]+$))/)[1]+'.js';
+        const filename = 'dist/'+changedFile.path.replace(/^.*[\\\/]/, '').match(/(.*)(?:\.([^.]+$))/)[1]+'.html';
         sendcontent(filename);
       }
       })
@@ -355,11 +355,13 @@ gulp.task( 'copy:xls', function() {
 } );
 
 gulp.task('symlink', function () {
+     vfs.src('dist/components',{followSymlinks: false})
+       .pipe(vfs.symlink('test'));
      vfs.src('dist/server',{followSymlinks: false})
        .pipe(vfs.symlink('test'));
  });
 
-gulp.task('serve', ['watch'],function() {
+gulp.task('serve', ['watch','watch:server'],function() {
 	return serve('dist');
 });
 
