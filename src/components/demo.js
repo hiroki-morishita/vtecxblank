@@ -4,9 +4,15 @@ import '../styles/simple-sidebar.css'
 import axios from 'axios'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ListItems from './demo_listitems'
-import ItemInput from './demo_iteminput'
-import ItemUpdate from './demo_itemupdate'
+
+//import ListItems from './demo_listitems'
+//import ItemInput from './demo_iteminput'
+//import ItemUpdate from './demo_itemupdate'
+
+import ListItems from './fermata_listitems'
+import ItemInput from './fermata_input'
+import ItemUpdate from './fermata_update'
+
 import {
 	BrowserRouter as Router,
 	Route,
@@ -17,6 +23,7 @@ import {
 import type {
 	InputEvent
 } from 'demo.types'
+
 
 
 class DemoContainer extends React.Component {
@@ -38,7 +45,8 @@ class DemoContainer extends React.Component {
 			/>
 		)
 	}
-    
+	
+	
 	iteminput = () => {
 		return (
 			<ItemInput 
@@ -55,6 +63,9 @@ class DemoContainer extends React.Component {
 		)
 	}
 	
+
+
+
 	logout() {
 		axios({
 			url: '/d/?_logout',
@@ -68,6 +79,11 @@ class DemoContainer extends React.Component {
 			location.href = 'login.html'
 		})
 	}
+
+
+	
+
+
 
 	render() {
 		return (

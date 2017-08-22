@@ -76,6 +76,7 @@ export default class VtecxPagination extends React.Component {
 		} 
 	}
 
+	
 	 handleSelect(eventKey:number) {		 
 		this.buildIndex(this.props.url, eventKey)
 		this.setState( {activePage: eventKey} )

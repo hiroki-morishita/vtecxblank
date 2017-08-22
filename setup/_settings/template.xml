@@ -19,12 +19,12 @@ hobby{}
  name
  updated(date)
 bill
- date_of_rent(date)
+ date_of_rent
  lender
  lender_tel
  publication
   type
-   drama_series(boolean)　
+   drama_series(boolean)
    drama_short(boolean)
    web(boolean)
    variety(boolean)
@@ -35,12 +35,12 @@ bill
    other
   publisher_name
   program_name
-  release_date(date)
+  release_date
   is_credit(boolean)
   prospective_user
   return_date
-   part(date)
-   final(date)
+   part
+   final
  items{}
   brand_name
   item_no

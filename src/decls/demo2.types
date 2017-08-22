@@ -2,42 +2,42 @@ type Bill = {
 		  date_of_rent: string,
 		  		lender: string,
 			lender_tel: number,
+			
+			publication: {
+					type  = {
+									drama_series: boolean,
+									 drama_short: boolean,
+											 web: boolean,
+									  	 variety: boolean,
+										   movie: boolean,
+									 newsprogram: boolean
+										magazine: boolean,
+											  cm: boolean,
+							    		   other: boolean,
+								 },
+
+				  publisher_name: string,
+					program_name: string,
+					release_date: string,
+					   is_credit: boolean,
+				prospective_user: string,
+					 Return_date: {
+	 							 part: string,
+								final: string
+					 }
+			},
+			Items = {
+								brand_name: string,
+								   item_no: number,
+								 item_name: string,
+							usage_situation: string,
+							   return_date: string
+			},
+
 		   credit_paid: boolean,
 	 return_completion: string,
 			   notices: string,
 	responsible_person: string
-}
-
-type Publication = {
-		drama_series: boolean,
-	 	 drama_short: boolean,
-				 web: boolean,
-		 	 variety: boolean,
-		   	   movie: boolean,
-	 	 newsprogram: boolean
-			magazine: boolean,
-			      cm: boolean,
-		       other: boolean,
-       other_notices: string,
-
-	  publisher_name: string,
-	    program_name: string,
-	    release_date: string,
-		   is_credit: boolean,
-	prospective_user: string
-}
-
-type Return_date = {
-	 part: string,
-	final: string
-}
-
-type Items = {
-		brand_name: string,
-	   	   item_no: number,
-	 	 item_name: string,
-	usagesituation: string,
-	   return_date: string
 }
 
 type Link = {
@@ -47,8 +47,6 @@ type Link = {
 
 type Entry = {
 	       bill?: Bill,
-	publication?: Publication,
-	return_date?: Return_date,
 	     items?: Array<Items>, 
 	       link: Array<Link>,
 	        id?: string
@@ -59,42 +57,43 @@ type Entries = {
 }
 
 export type State = {
-				  feed: Entries,
+								feed: Entries,
 
-		  date_of_rent: string,
-				lender: string,
-			lender_tel: string,
-        
-          drama_series: boolean,
-           drama_short: boolean,
-                   web: boolean,
-               variety: boolean,
-                 movie: boolean,
-           newsprogram: boolean,
-              magazine: boolean,
-                    cm: boolean,
-                 other: boolean,
-         other_notices: string,
-        　  
-		publisher_name: string,
-		  program_name: string,
-		  release_date: string,
-		 is_credit_use: boolean,
-      is_credit_unUsed: boolean,
-	  prospective_user: string,
-      return_date_part: string,
-     return_date_final: string,
-		   credit_paid: boolean,
-         credit_unPaid: boolean,
-	 return_completion: string,
-			   notices: string,
-	responsible_person: string,
+						date_of_rent: date,
+								lender: string,
+							lender_tel: string,
+						
+						drama_series: boolean,
+						drama_short: boolean,
+								web: boolean,
+							variety: boolean,
+								movie: boolean,
+						newsprogram: boolean,
+							magazine: boolean,
+									cm: boolean,
+								other: string,
+						other_notices: string,
+				publicationType_Option: string,
+						publisher_name: string,
+						program_name: string,
+						release_date: string,
+						is_credit_use: boolean,
+					is_credit_unUsed: boolean,
+					prospective_user: string,
+					return_date_part: string,
+					return_date_final: string,
+						credit_paid: boolean,
+						credit_unPaid: boolean,
+					return_completion: string,
+							notices: string,
+					responsible_person: string,
 
-		   isCompleted: boolean,
-	  		 isDeleted: boolean,
-			   isError: boolean,
-		 		errmsg: string,
-		   isForbidden: boolean
+								rows: Array<number>,
+						isCompleted: boolean,
+							isDeleted: boolean,
+							isError: boolean,
+								errmsg: string,
+						isForbidden: boolean
 }
 
 export type Props = {
@@ -106,12 +105,36 @@ type Value = {
 }
 
 type Target = {
-		id: Value,
-	 email: Value,
-	  food: Value,
-	 music: Value,
-	  name: string,
-	 value: string
+			date_of_rent: any,
+	 			  lender: Value,
+	  	  	  lender_tel: Value,
+
+			drama_series: boolean,
+             drama_short: boolean,
+                     web: boolean,
+                 variety: boolean,
+                   movie: boolean,
+             newsprogram: boolean,
+                magazine: boolean,
+                      cm: boolean,
+                   other: boolean,
+           other_notices: Value,
+        　  
+		  publisher_name: Value,
+		    program_name: Value,
+		    release_date: Value,
+		   is_credit_use: boolean,
+        is_credit_unUsed: boolean,
+
+	    prospective_user: Value,
+        return_date_part: Value,
+       return_date_final: Value,
+
+		     credit_paid: boolean,
+           credit_unPaid: boolean,
+	   return_completion: Value,
+			     notices: Value,
+	  responsible_person: Value,
 }
 
 export type InputEvent = {

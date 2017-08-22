@@ -19,13 +19,16 @@ import type {
 	Props
 } from 'demo.types'
 
-type State = {
-	rows: Array<number>,
-	isCompleted: boolean,
-	isError: boolean,
-	errmsg: string,
-	isForbidden: boolean,
+
+
+type State = {		
+				   rows: Array<number>,
+			isCompleted: boolean,
+				isError: boolean,
+				 errmsg: string,
+			isForbidden: boolean,
 }
+
 
 export default class ItemInput extends React.Component {
 	state: State
@@ -162,6 +165,9 @@ export default class ItemInput extends React.Component {
 								{this.state.rows.map(row => this.HobbyForm(row))}
       						</table>
 
+
+
+							
 							<FormGroup>
 								<Button className="btn btn-default" onClick={() => this.addRow() }>
 									<Glyphicon glyph="plus" />
