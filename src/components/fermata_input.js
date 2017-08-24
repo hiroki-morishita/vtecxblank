@@ -32,7 +32,10 @@ type State = {
 			isCompleted: boolean,
 				isError: boolean,
 				 errmsg: string,
-			isForbidden: boolean,
+		    isForbidden: boolean,
+			 	   type: string,
+		      creditUse: string,
+	         creditPaid: string,
 }
 
 export default class ItemInput extends React.Component {
@@ -46,7 +49,10 @@ export default class ItemInput extends React.Component {
 			 return_date_part: moment(),		//一部返却日
 			return_date_final: moment(),		//最終返却日
 			return_completion: moment(),		//返却完了日	
-				   		 rows: [1],
+			             rows: [1],
+						 type: '',
+			        creditUse: '',
+				   creditPaid: '',
 				  isCompleted: false,
 					  isError: false,
 				 	   errmsg: '',
@@ -57,8 +63,8 @@ export default class ItemInput extends React.Component {
 		this.setReturn_date[0] = function (date) {
 			this.setState({ return_date1: date })
 		}.bind(this)
-		//setReturn_date配列を作る。
-		//setReturn_dateの0番目に1行目の日付変更処理の関数をセットする。
+		//setReturn_date配列を作る
+		//setReturn_dateの0番目に1行目の日付変更処理の関数をセットする
 	}
  
 
@@ -78,6 +84,19 @@ export default class ItemInput extends React.Component {
 		this.setState({ return_completion: date })
 	}
 
+	RadiohandleChange_type(e: InputEvent) {
+
+		this.setState({ type: e.target.id })
+	}
+	RadiohandleChange_creditUse(e: InputEvent) {
+
+		this.setState({ creditUse: e.target.id })
+	}
+	RadiohandleChange_creditPaid(e: InputEvent) {
+
+		this.setState({ creditPaid: e.target.id })
+	}
+
 	static propTypes = {
 		hideSidemenu: PropTypes.func
 	}
@@ -88,39 +107,30 @@ export default class ItemInput extends React.Component {
 		let reqdata = {'feed': {'entry': [] } }
 		let entry = {}
 		entry.bill = {
-					    date_of_rent: e.target.date_of_rent.value,
-			            	  lender: e.target.lender.value,
-			          	  lender_tel: e.target.lender_tel.value,	  
-							  publication: {
-													 'type': {	drama_series: e.target.drama_series.checked,
-					drama_short: e.target.drama_short.checked,
-					web: e.target.web.checked,
-					variety: e.target.variety.checked,
-					movie: e.target.movie.checked,
-					newsprogram: e.target.newsprogram.checked,
-					magazine: e.target.magazine.checked,
-					cm: e.target.cm.checked,
-					other: e.target.other.checked ? e.target.other_notices.value : '',
-                             						 },
-							   
-		
-								    		  publisher_name: e.target.publisher_name.value,
-								      			program_name: e.target.program_name.value,
-								  	  			release_date: e.target.release_date.value,
-				     			   		 		   is_credit: e.target.credit_Use.checked,
-								  			prospective_user: e.target.prospective_user.value,	
-						  			   			 return_date: {
-							  									 		part: e.target.return_date_part.value,
-					                                   		   		   final: e.target.return_date_final.value,
+					    date_of_rent: e.target.date_of_rent.value ? e.target.date_of_rent.value : '',
+			            	  lender: e.target.lender.value ? e.target.lender.value : '',
+			          	  lender_tel: e.target.lender_tel.value ? e.target.lender_tel.value : '',	  
+						 publication: {
+								                         type: this.state.type ? this.state.type : '',
+								                other_notices: e.target.other_notices.value  ? e.target.other_notices.value  : '',
+								    		   publisher_name: e.target.publisher_name.value ? e.target.publisher_name.value : '',
+								      		     program_name: e.target.program_name.value   ? e.target.program_name.value   : '',
+								  	  			 release_date: e.target.release_date.value   ? e.target.release_date.value   : '',
+				     			   		 		    is_credit: this.state.creditUse ? this.state.creditUse : '',
+								  			 prospective_user: e.target.prospective_user.value ? e.target.prospective_user.value : '',	
+						  			   			  return_date: {
+							  									   part: e.target.return_date_part.value  ? e.target.return_date_part.value  : '',
+					                                    	      final: e.target.return_date_final.value ? e.target.return_date_final.value : '',
 				                                 },
 							  },   
 						   'items': [],
 						 
-					 credit_paid: e.target.credit_Paid.checked,
-			   return_completion: e.target.return_completion.value,
-					     notices: e.target.notices.value,
-			  responsible_person: e.target.responsible_person.value,
+			         credit_paid: this.state.creditPaid ? this.state.creditPaid : '',
+			   return_completion: e.target.return_completion.value ? e.target.return_completion.value : '',
+					     notices: e.target.notices.value ? e.target.notices.value : '',
+			  responsible_person: e.target.responsible_person.value ? e.target.responsible_person.value : '',
 		}
+		
 		this.state.rows.map(row => 
 			entry.bill.items.push({
 				    'brand_name': e.target[     'brand_name' + row].value,
@@ -178,7 +188,7 @@ export default class ItemInput extends React.Component {
 		const return_date = 'return_date' + (this.state.rows.length + 1)
 		this.setReturn_date[this.state.rows.length] = function (date) {
 			this.setState({ [return_date]: date })
-			console.log('return_date='+return_date)
+
 		}.bind(this)
 
 	}
@@ -232,7 +242,7 @@ export default class ItemInput extends React.Component {
 			</tbody>
 		)
 	}
-  
+	
 	render() {
 		return (
 			<Grid>
@@ -260,7 +270,6 @@ export default class ItemInput extends React.Component {
 										onChange={(e) => this.DatehandleChange_date_of_rent(e)} />
 								</FormGroup>
 							</Col>
-
 							
 							<FormGroup controlId="lender"> 
 								<Col xs={10}sm={10}md={10}lg={10}xl={10}>
@@ -279,19 +288,20 @@ export default class ItemInput extends React.Component {
 							<h3>使用媒体</h3>
 							<FormGroup controlId="publication">
 								<Col xs={10}sm={10}md={10}lg={10}xl={10}>
-									<Radio id="drama_series" name="media" inline>ドラマ(連続)</Radio>
-									<Radio id="drama_short"  name="media" inline>ドラマ(単発)</Radio>
-									<Radio id="web"          name="media" inline>WEB</Radio>
-									<Radio id="variety"      name="media" inline>バラエティー</Radio>
+									<Radio id="drama_series" name="media" checked={this.state.type === 'drama_series'} onChange={(e) => this.RadiohandleChange_type(e)} inline>ドラマ(連続)</Radio>
+									<Radio id="drama_short"  name="media" checked={this.state.type === 'drama_short'}  onChange={(e) => this.RadiohandleChange_type(e)} inline>ドラマ(単発)</Radio>
+									<Radio id="web" 		 name="media" checked={this.state.type === 'web'} 		   onChange={(e) => this.RadiohandleChange_type(e)} inline>WEB</Radio>
+									<Radio id="variety" 	 name="media" checked={this.state.type === 'variety'} 	   onChange={(e) => this.RadiohandleChange_type(e)} inline>バラエティー</Radio>
 									<br />
-									<Radio id="movie"        name="media" inline>映画</Radio>
-									<Radio id="newsprogram"  name="media" inline>情報・報道番組</Radio>
-									<Radio id="magazine"     name="media" inline>雑誌</Radio>
-									<Radio id="cm"           name="media" inline>CM</Radio>
+									<Radio id="movie" 		 name="media" checked={this.state.type === 'movie'} 	   onChange={(e) => this.RadiohandleChange_type(e)} inline>映画</Radio>
+									<Radio id="newsprogram"  name="media" checked={this.state.type === 'newsprogram'}  onChange={(e) => this.RadiohandleChange_type(e)} inline>情報・報道番組</Radio>
+									<Radio id="magazine" 	 name="media" checked={this.state.type === 'magazine'} 	   onChange={(e) => this.RadiohandleChange_type(e)} inline>雑誌</Radio>
+									<Radio id="cm" 			 name="media" checked={this.state.type === 'cm'} 		   onChange={(e) => this.RadiohandleChange_type(e)} inline>CM</Radio>
 									<br />
-									<Radio id="other" name="media" inline>その他</Radio>
+									<Radio id="other" 		 name="media" checked={this.state.type === 'other'} 	   onChange={(e) => this.RadiohandleChange_type(e)} inline>その他</Radio>
 								</Col>
 							</FormGroup>
+						
 							<FormGroup controlId="other_notices">
 								<Col xs={10}sm={10}md={10}lg={10}xl={10}>
 									<FormControl type="text" placeholder="その他記入欄" />
@@ -323,12 +333,14 @@ export default class ItemInput extends React.Component {
 								</Col>
 							</FormGroup>
 
-							<FormGroup controlId="is_credit">
+							<FormGroup controlId="IS_CREDIT">
 								<Col xs={10} sm={10} md={10} lg={10} xl={10}>
 									<ControlLabel>クレジット</ControlLabel>	
 									<br/>
-									<Radio id="credit_Use" name="is_credit"  inline>有</Radio>
-									<Radio id="credit_unUsed" name="is_credit"  inline>無</Radio>
+									<Radio id="credit_Use" name="is_credit" checked={this.state.creditUse === 'credit_Use'}
+										   onChange={(e) => this.RadiohandleChange_creditUse(e)} inline>有</Radio>
+									<Radio id="credit_unUsed" name="is_credit" checked={this.state.creditUse === 'credit_unUsed'}
+										   onChange={(e) => this.RadiohandleChange_creditUse(e)} inline>無</Radio>
 								</Col>
 							</FormGroup>
 
@@ -351,6 +363,7 @@ export default class ItemInput extends React.Component {
 								</Col>
 							</FormGroup>
 
+							
 							<FormGroup controlId="return_date_final">
 								<Col xs={10}sm={10} md={10} lg={10} xl={10}>
 									<ControlLabel>最終返却日</ControlLabel>
@@ -383,17 +396,17 @@ export default class ItemInput extends React.Component {
 								</Button>
 							</FormGroup>
 
-							<FormGroup controlId="credit_paid">
+							<FormGroup controlId="CREDIT_PAID">
 								<Col xs={10} sm={10} md={10} lg={10} xl={10}>
 									<ControlLabel>クレジット払</ControlLabel>	
 									<br/>
-									<Radio id="credit_Paid" name="creditP"  inline>有</Radio>
-									<Radio id="credit_unPaid" name="creditP"  inline>無</Radio>
+									<Radio id="credit_Paid"   name="creditP" checked={this.state.creditPaid === 'credit_Paid'}   onChange={(e) => this.RadiohandleChange_creditPaid(e) } inline >有</Radio>
+									<Radio id="credit_unPaid" name="creditP" checked={this.state.creditPaid === 'credit_unPaid'} onChange={(e) => this.RadiohandleChange_creditPaid(e) } inline >無</Radio>
 								</Col>
 							</FormGroup>
 
 
-							<FormGroup controlId="return_completion">
+							<FormGroup controlId="RETURN_COMPLETION">
 								<Col xs={10}sm={10} md={10} lg={10} xl={10}>
 									<ControlLabel>返却完了日</ControlLabel>
 									<br/>

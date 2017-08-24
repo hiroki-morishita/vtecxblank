@@ -33,35 +33,26 @@ export default class ItemUpdate extends React.Component {
 	constructor(props:Props) {
 		super(props)
 		this.state = {
-						  	 feed: {},
+							 feed: {},
+			
 				  	 date_of_rent: '',		//貸出日
 			        	   lender: '',		//貸出先	
 					   lender_tel: '',		//貸出先連絡
-
-					 drama_series: false,
-					  drama_short: false,
-					   		  web: false,
-					   	  variety: false,
-					   		movie: false,
-					  newsprogram: false,
-					   	 magazine: false,
-					   		   cm: false,
-					   		other: false,
-			other_notices: '',
+					   
+						     type: '',
+			        other_notices: '',
 					
 			       publisher_name: '',		//局名・出版社名
 					 program_name: '',		//番組名・雑誌名
 					 release_date: moment(),//放送日
-					    creditUse: false,	//クレジット有
-				     creditUnUsed: false,   //クレジット無
+					    creditUse: '',	
 				 prospective_user: '',		//着用者
 				 
 			    return_date_part: moment(),
 			   return_date_final: moment(),
 				
-					  creditPaid: false,	//クレジット済
-			        creditUnPaid: false,	//クレジット未
-			   return_completion: moment(),//返却完了日
+					  creditPaid: '',	    //クレジット済
+			   return_completion: moment(), //返却完了日
 					   	 notices: '',		//備考
 			  responsible_person: '',		//担当者
 
@@ -95,34 +86,16 @@ export default class ItemUpdate extends React.Component {
 		this.setState({ return_completion: date })
 	}
 
-	publication_handleChange(e: InputEvent) {
-		this.setState({  drama_series: false,
-						  drama_short: false,
-						          web: false,
-						      variety: false,
-			movie: false,
-						  newsprogram: false,
-						     magazine: false,
-								   cm: false,
-			other: false,
-			[e.target.id]: true
-		})
+	RadiohandleChange_type(e: InputEvent) {
+		this.setState({ type:e.target.id })
 	}
 
-	credit_Use_handleChange(e: InputEvent) {
-		this.setState({
-						    creditUse: false,
-						 creditUnUsed: false,
-			[e.target.id]:  true,
-		})
+	RadiohandleChange_creditUse(e: InputEvent) {
+		this.setState({ creditUse: e.target.id })
 	}
 
-	credit_Paid_handleChange(e: InputEvent) {
-		this.setState({
-						   creditPaid: false,
-						 creditUnPaid: false,
-			[e.target.id]: true,
-		})
+	RadiohandleChange_creditPaid(e: InputEvent) {
+		this.setState({ creditPaid:e.target.id })
 	}
 
 	static propTypes = {
@@ -134,33 +107,23 @@ export default class ItemUpdate extends React.Component {
 				   date_of_rent: this.state.feed.entry ? moment(Date.parse(this.state.feed.entry[0].bill.date_of_rent)) : moment(),
 					 	 lender: this.state.feed.entry ? this.state.feed.entry[0].bill.lender : '',
 					 lender_tel: this.state.feed.entry ? this.state.feed.entry[0].bill.lender_tel : '',
-					 
-				   drama_series: this.state.feed.entry ? this.state.feed.entry[0].bill.publication.type.drama_series : false,
-			        drama_short: this.state.feed.entry ? this.state.feed.entry[0].bill.publication.type.drama_short : false,
-			                web: this.state.feed.entry ? this.state.feed.entry[0].bill.publication.type.web : false,
-			            variety: this.state.feed.entry ? this.state.feed.entry[0].bill.publication.type.variety : false,
-						  movie: this.state.feed.entry ? this.state.feed.entry[0].bill.publication.type.movie : false,
-			        newsprogram: this.state.feed.entry ? this.state.feed.entry[0].bill.publication.type.newsprogram : false,
-					   magazine: this.state.feed.entry ? this.state.feed.entry[0].bill.publication.type.magazine : false,
-							 cm: this.state.feed.entry ? this.state.feed.entry[0].bill.publication.type.cm : false,
-						  other: this.state.feed.entry ? this.state.feed.entry[0].bill.publication.type.other : false,
-				  other_notices: (this.state.feed.entry && this.state.feed.entry[0].bill.publication.type.other ) ? this.state.feed.entry[0].bill.publication.type.other : '',
+					
+					       type: this.state.feed.entry ? this.state.feed.entry[0].bill.publication.type : '',
+				  other_notices:(this.state.feed.entry &&this.state.feed.entry[0].bill.publication.type === 'other' ) ? this.state.feed.entry[0].bill.publication.other_notices : '',
 			
 				 publisher_name: this.state.feed.entry ? this.state.feed.entry[0].bill.publication.publisher_name : '',
 				   program_name: this.state.feed.entry ? this.state.feed.entry[0].bill.publication.program_name : '',
 				   
 				   release_date: this.state.feed.entry ? moment(Date.parse(this.state.feed.entry[0].bill.publication.release_date)) : moment(),
 				   
-				   	  creditUse: (this.state.feed.entry && this.state.feed.entry[0].bill.publication.is_credit) ?  true : false,
-				   creditUnUsed: (this.state.feed.entry && this.state.feed.entry[0].bill.publication.is_credit) ? false : true,
+				   	  creditUse: this.state.feed.entry ? this.state.feed.entry[0].bill.publication.is_credit : '',
 			  
 			   prospective_user: this.state.feed.entry ? this.state.feed.entry[0].bill.publication.prospective_user : '',
 			
 			   return_date_part: this.state.feed.entry ? moment(Date.parse(this.state.feed.entry[0].bill.publication.return_date.part)) : moment(),
 			  return_date_final: this.state.feed.entry ? moment(Date.parse(this.state.feed.entry[0].bill.publication.return_date.final)) : moment(),
 			
-					 creditPaid: (this.state.feed.entry && this.state.feed.entry[0].bill.credit_paid ) ?  true : false,
-			       creditUnPaid: (this.state.feed.entry && this.state.feed.entry[0].bill.credit_paid) ? false : true,
+					 creditPaid: this.state.feed.entry ? this.state.feed.entry[0].bill.credit_paid : '',
 					
 			  return_completion: this.state.feed.entry ? moment(Date.parse(this.state.feed.entry[0].bill.return_completion)) : moment(),
 			 			notices: this.state.feed.entry ? this.state.feed.entry[0].bill.notices : '',
@@ -254,22 +217,12 @@ export default class ItemUpdate extends React.Component {
 			            	  lender: e.target.lender.value,
 			          	  lender_tel: e.target.lender_tel.value,	  
 					 	 publication: {
-						 			 				  'type': {
-					                                            drama_series: e.target.drama_series.checked,
-																 drama_short: e.target.drama_short.checked,
-																		 web: e.target.web.checked,
-																	 variety: e.target.variety.checked,
-																	   movie: e.target.movie.checked,
-																 newsprogram: e.target.newsprogram.checked,
-					                                                magazine: e.target.magazine.checked,
-																		  cm: e.target.cm.checked,
-																	   other: e.target.other.checked ? e.target.other_notices.value : '',
-							   						   },
-							   
+						 			 				    type: this.state.type,
+							   				   other_notices: e.target.other_notices.value,
 								    		  publisher_name: e.target.publisher_name.value,
 								      			program_name: e.target.program_name.value,
 								  	  			release_date: e.target.release_date.value,
-				     			   		 		   is_credit: e.target.creditUse.checked,
+				     			   		 		   is_credit: this.state.creditUse,
 								  			prospective_user: e.target.prospective_user.value,	
 						  			   			 return_date: {
 							  									 		part: e.target.return_date_part.value,
@@ -278,12 +231,11 @@ export default class ItemUpdate extends React.Component {
 							  },   
 						   'items': [],
 						 
-					 credit_paid: e.target.creditPaid.checked,
+					 credit_paid: this.state.creditPaid,
 					 
 			   return_completion: e.target.return_completion.value,
 					     notices: e.target.notices.value,
 			  responsible_person: e.target.responsible_person.value,
-			  
 		}
 		
 		this.state.feed.entry[0].bill.items.map((row,key) => 
@@ -488,44 +440,17 @@ export default class ItemUpdate extends React.Component {
 							<h3>使用媒体</h3>
 							<FormGroup controlId="publication">
 								<Col xs={10}sm={10}md={10}lg={10}xl={10}>
-									<Radio id="drama_series"
-										   name="media"
-										   checked={this.state.drama_series}
-										   onChange={(e) => this.publication_handleChange(e)} inline>ドラマ(連続)</Radio>
-									<Radio id="drama_short"
-										   name="media"
-										   checked={this.state.drama_short}
-										   onChange={(e) => this.publication_handleChange(e)} inline>ドラマ(単発)</Radio>
-									<Radio id="web"
-										   name="media"
-										   checked={this.state.web}
-										   onChange={(e) => this.publication_handleChange(e)} inline>WEB</Radio>
-									<Radio id="variety"
-										   name="media"
-										   checked={this.state.variety} 
-										   onChange={(e) => this.publication_handleChange(e)} inline>バラエティー</Radio>
+									<Radio id="drama_series" name="media" checked={this.state.type === 'drama_series'} onChange={(e) => this.RadiohandleChange_type(e)} inline>ドラマ(連続)</Radio>
+									<Radio id="drama_short"  name="media" checked={this.state.type === 'drama_short'}  onChange={(e) => this.RadiohandleChange_type(e)} inline>ドラマ(単発)</Radio>
+									<Radio id="web" 		 name="media" checked={this.state.type === 'web'} 		   onChange={(e) => this.RadiohandleChange_type(e)} inline>WEB</Radio>
+									<Radio id="variety" 	 name="media" checked={this.state.type === 'variety'} 	   onChange={(e) => this.RadiohandleChange_type(e)} inline>バラエティー</Radio>
 									<br />
-									<Radio id="movie"
-										   name="media"
-										   checked={this.state.movie}
-										   onChange={(e) => this.publication_handleChange(e)} inline>映画</Radio>
-									<Radio id="newsprogram"
-										   name="media"
-										   checked={this.state.newsprogram}
-									       onChange={(e) => this.publication_handleChange(e)} inline>情報・報道番組</Radio>
-									<Radio id="magazine"
-									 	   name="media"
-										   checked={this.state.magazine}
-										   onChange={(e) => this.publication_handleChange(e)} inline>雑誌</Radio>
-									<Radio id="cm"
-										   name="media"
-										   checked={this.state.cm}
-										   onChange={(e) => this.publication_handleChange(e)} inline>CM</Radio>
+									<Radio id="movie" 		 name="media" checked={this.state.type === 'movie'} 	   onChange={(e) => this.RadiohandleChange_type(e)} inline>映画</Radio>
+									<Radio id="newsprogram"  name="media" checked={this.state.type === 'newsprogram'}  onChange={(e) => this.RadiohandleChange_type(e)} inline>情報・報道番組</Radio>
+									<Radio id="magazine" 	 name="media" checked={this.state.type === 'magazine'} 	   onChange={(e) => this.RadiohandleChange_type(e)} inline>雑誌</Radio>
+									<Radio id="cm" 			 name="media" checked={this.state.type === 'cm'} 		   onChange={(e) => this.RadiohandleChange_type(e)} inline>CM</Radio>
 									<br />
-									<Radio id="other"
-										   name="media"
-										   checked={this.state.other}
-										   onChange={(e) => this.publication_handleChange(e)} inline>その他</Radio>
+									<Radio id="other" 		 name="media" checked={this.state.type === 'other'} 	   onChange={(e) => this.RadiohandleChange_type(e)} inline>その他</Radio>
 								</Col>
 							</FormGroup>
 
@@ -576,14 +501,10 @@ export default class ItemUpdate extends React.Component {
 								<Col xs={10}sm={10}md={10}lg={10}xl={10}>
 									<ControlLabel>クレジット</ControlLabel>
 									<br/>
-									<Radio id="creditUse"
-										   name="is_credit_Use"
-										   checked={this.state.creditUse}
-										   onChange={(e) => this.credit_Use_handleChange(e)} inline>有</Radio>
-									<Radio id="creditUnUsed"
-										   name="is_credit_Use"
-										   checked={this.state.creditUnUsed}
-										   onChange={(e) => this.credit_Use_handleChange(e)} inline>無</Radio>
+									<Radio id="credit_Use" name="is_credit" checked={this.state.creditUse === 'credit_Use'}
+										   onChange={(e) => this.RadiohandleChange_creditUse(e)} inline>有</Radio>
+									<Radio id="credit_unUsed" name="is_credit" checked={this.state.creditUse === 'credit_unUsed'}
+										   onChange={(e) => this.RadiohandleChange_creditUse(e)} inline>無</Radio>
 								</Col>
 							</FormGroup>
 
@@ -602,9 +523,9 @@ export default class ItemUpdate extends React.Component {
 									<ControlLabel>一部返却日</ControlLabel>
 									<br/>
 									<DatePicker selected={this.state.return_date_part}
-										name="return_date_part"
-										value={this.state.return_date_part}
-										onChange={(e) => this.DatehandleChange_return_date_part(e)} />
+											    name="return_date_part"
+											    value={this.state.return_date_part}
+											    onChange={(e) => this.DatehandleChange_return_date_part(e)} />
 								</Col>
 							</FormGroup>
 
@@ -613,9 +534,9 @@ export default class ItemUpdate extends React.Component {
 									<ControlLabel>最終返却日</ControlLabel>
 									<br/>
 									<DatePicker selected={this.state.return_date_final}
-										name="return_date_final"
-										value={this.state.return_date_final}
-										onChange={(e) => this.DatehandleChange_return_date_final(e)} />
+										        name="return_date_final"
+										        value={this.state.return_date_final}
+										        onChange={(e) => this.DatehandleChange_return_date_final(e)} />
 								</Col>
 							</FormGroup>
 
@@ -646,14 +567,10 @@ export default class ItemUpdate extends React.Component {
 								<Col xs={10}sm={10}md={10}lg={10}xl={10}>
 									<ControlLabel>クレジット払</ControlLabel>
 									<br/>
-									<Radio id="creditPaid"
-										   name="is_credit_Paid"
-										   checked={this.state.creditPaid}
-										   onChange={(e) => this.credit_Paid_handleChange(e)} inline>済</Radio>
-									<Radio id="creditUnPaid"
-										   name="is_credit_Paid"
-										   checked={this.state.creditUnPaid}
-										   onChange={(e) => this.credit_Paid_handleChange(e)} inline>未</Radio>
+									<Radio id="credit_Paid" name="creditP" checked={this.state.creditPaid === 'credit_Paid'}
+										   onChange={(e) => this.RadiohandleChange_creditPaid(e)} inline >有</Radio>
+									<Radio id="credit_unPaid" name="creditP" checked={this.state.creditPaid === 'credit_unPaid'}
+										   onChange={(e) => this.RadiohandleChange_creditPaid(e)} inline >無</Radio>
 								</Col>
 							</FormGroup>
 							
@@ -662,8 +579,10 @@ export default class ItemUpdate extends React.Component {
 								<Col xs={10}sm={10} md={10} lg={10} xl={10}>
 									<ControlLabel>返却完了日</ControlLabel>
 									<br/>
-									<DatePicker selected={this.state.return_completion} name="return_completion"
-										value={this.state.return_completion} onChange={(e)=>this.DatehandleChange_return_completion(e)} />
+									<DatePicker selected={this.state.return_completion}
+										        name="return_completion"
+										        value={this.state.return_completion}
+										        onChange={(e) => this.DatehandleChange_return_completion(e)} />
 								</Col>
 							</FormGroup>
 

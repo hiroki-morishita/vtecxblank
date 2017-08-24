@@ -24,30 +24,22 @@ bill
  lender_tel
  publication
   type
-   drama_series(boolean)
-   drama_short(boolean)
-   web(boolean)
-   variety(boolean)
-   movie(boolean)
-   newsprogram(boolean)
-   magazine(boolean)
-   cm(boolean)
-   other
   publisher_name
   program_name
   release_date
-  is_credit(boolean)
+  is_credit
   prospective_user
   return_date
    part
    final
+  other_notices 
  items{}
   brand_name
   item_no
   item_name
   usage_situation
   return_date
- credit_paid(boolean)
+ credit_paid
  return_completion
  notices
  responsible_person

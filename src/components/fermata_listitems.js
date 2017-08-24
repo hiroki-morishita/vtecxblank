@@ -3,7 +3,7 @@ import axios from 'axios'
 import React from 'react'
 import PropTypes from 'prop-types'
 import VtecxPagination from './vtecx_pagination'
-import ConditionInputForm from './demo_conditioninput'
+import ConditionInputForm from './fermata_conditioninput'
 import ReactDOM from 'react-dom'
 import {
 	Table,
@@ -65,7 +65,7 @@ export default class ListItems extends React.Component {
 			// 「response.data.feed」に１ページ分のデータ(1~50件目)が格納されている
 			// activePageが「2」だったら51件目から100件目が格納されている
 			this.setState({ feed: response.data.feed })
-			//console.log('feed=' + JSON.stringify(this.state.feed.entry.bill.id))
+
 
 		}).catch((error) => {
 			if (error.response) {
@@ -93,10 +93,8 @@ export default class ListItems extends React.Component {
 	onSelect(e:InputEvent) {
 		// 入力画面に遷移
 		const id = e.currentTarget.id.match(/^\/registration\/(.+),.*$/)
-		//console.log(id)
-		console.log('feed=' + JSON.stringify(this.state.feed.entry[0].id))
 		this.props.history.push('/itemupdate?' + id[1])
-		
+	
 	}
 
 
@@ -107,58 +105,66 @@ export default class ListItems extends React.Component {
 				<td>{entry.bill.date_of_rent}</td>
 				<td>{entry.bill.lender}</td>
 				<td>{entry.bill.lender_tel}</td>
-
-				{entry.bill.publication.type.drama_series &&
+				
+				{entry.bill.publication.type === 'drama_series' &&
 						<td>連続ドラマ</td>
 				}
-				{entry.bill.publication.type.drama_short &&
+				{entry.bill.publication.type ==='drama_short' &&
 						<td>単発ドラマ</td>
 				}
-				{entry.bill.publication.type.web && 
+				{entry.bill.publication.type === 'web' && 
 						<td>WEB</td>
 				}
-				{entry.bill.publication.type.variety &&
+				{entry.bill.publication.type === 'variety' &&
 						<td>バラエティー</td>
 				}
-				{entry.bill.publication.type.movie &&
+				{entry.bill.publication.type === 'movie' &&
 						<td>映画</td>
 				}
-				{entry.bill.publication.type.newsprogram &&
+				{entry.bill.publication.type === 'newsprogram' &&
 						<td>情報・報道番組</td>
 				}
-				{entry.bill.publication.type.magazine &&
+				{entry.bill.publication.type === 'magazine' &&
 						<td>雑誌</td>
 				}
-				{entry.bill.publication.type.cm &&
+				{entry.bill.publication.type === 'cm' &&
 						<td>CM</td>
 				}
-				{entry.bill.publication.type.other &&	
-					<td>{entry.bill.publication.type.other}</td>
+				{entry.bill.publication.type === 'other' &&	
+					<td>{entry.bill.publication.other_notices}</td>
+				}
+				{entry.bill.publication.type === '' &&
+						<td></td>
 				}
 
 				<td>{entry.bill.publication.publisher_name}</td>
 				<td>{entry.bill.publication.program_name}</td>
 				<td>{entry.bill.publication.release_date}</td>
 				
-				{entry.bill.publication.is_credit &&
+				{entry.bill.publication.is_credit === 'credit_Use' &&
 					<td>有</td>
 				}
-				{!entry.bill.publication.is_credit &&
+				{entry.bill.publication.is_credit === 'credit_unUsed' &&
 					<td>無</td>
 				}
+				{entry.bill.publication.is_credit === '' &&
+					<td></td>
+				}
+
 				<td>{entry.bill.publication.prospective_user}</td>
 				<td>{entry.bill.publication.return_date.part}</td>
 				<td>{entry.bill.publication.return_date.final}</td>
 
-				{entry.bill.credit_paid &&
+				{entry.bill.credit_paid === 'credit_Paid' &&
 					<td>済</td>
 				}
-
-				{!entry.bill.credit_paid &&
+				{entry.bill.credit_paid === 'credit_unPaid' &&
 					<td>未</td>
 				}
+				{entry.bill.credit_paid === '' &&
+					<td></td>
+				}
 				
-
 				<td>{entry.bill.return_completion}</td>
 				<td>{entry.bill.notices}</td>
 				<td>{entry.bill.responsible_person}</td>		
@@ -241,6 +247,5 @@ export default class ListItems extends React.Component {
 		)
 	}
 }
-
 ReactDOM.render(<ListItems />, document.getElementById('container'))
 
