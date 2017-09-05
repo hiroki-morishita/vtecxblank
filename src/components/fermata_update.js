@@ -62,7 +62,7 @@ export default class ItemUpdate extends React.Component {
 			              errmsg: '',
 				     isForbidden: false
 		}
-		moment.locale('ja')
+		//moment.locale('ja')
 		this.setReturn_date = []
 		this.setReturn_date[0] = function(date) {
 			this.setState({ return_date1: date })
@@ -129,7 +129,7 @@ export default class ItemUpdate extends React.Component {
 			 			notices: this.state.feed.entry ? this.state.feed.entry[0].bill.notices : '',
 			 responsible_person: this.state.feed.entry ? this.state.feed.entry[0].bill.responsible_person : ''
 		})
-		
+		console.log(this.state.feed.entry[0].bill.date_of_rent)
 		this.state.feed.entry[0].bill.items.map(
 			(items, i) => {
 				const 	   brand_name = 'brand_name' + i
@@ -138,7 +138,7 @@ export default class ItemUpdate extends React.Component {
 				const usage_situation = 'usage_situation' + i
 				const 	  return_date = 'return_date' + i
 
-				
+				this.state.date_of_rent
 				this.setState({
 					                    [brand_name]: items.brand_name,
 										   [item_no]: items.item_no,
@@ -285,7 +285,10 @@ export default class ItemUpdate extends React.Component {
 	addRow() {
 		this.setState(
 			(prevState) =>
-				({feed: ((prevState) => { 
+				({feed: ((prevState) => {
+					
+					
+
 					if (!prevState.feed.entry[0].bill.items) {
 						prevState.feed.entry[0].bill.items = []
 					
@@ -298,9 +301,14 @@ export default class ItemUpdate extends React.Component {
 							   return_date: moment(),
 					})
 					return prevState.feed
+
+
+					
 				})(prevState)
 				})
 		)
+		
+
 		
 
 		const return_date = 'return_date' + (this.state.feed.entry[0].bill.items.length)

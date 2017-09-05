@@ -58,7 +58,7 @@ export default class ItemInput extends React.Component {
 				 	   errmsg: '',
 				  isForbidden: false
 		}    
-		moment.locale('ja')
+		
 		this.setReturn_date = []
 		this.setReturn_date[0] = function (date) {
 			this.setState({ return_date1: date })
@@ -69,7 +69,7 @@ export default class ItemInput extends React.Component {
  
 
 	DatehandleChange_date_of_rent(date) {
-		this.setState({ date_of_rent: date })
+		this.setState({ date_of_rent: date })	
 	}
 	DatehandleChange_release_date(date) {
 		this.setState({ release_date: date } )
@@ -85,15 +85,12 @@ export default class ItemInput extends React.Component {
 	}
 
 	RadiohandleChange_type(e: InputEvent) {
-
 		this.setState({ type: e.target.id })
 	}
 	RadiohandleChange_creditUse(e: InputEvent) {
-
 		this.setState({ creditUse: e.target.id })
 	}
 	RadiohandleChange_creditPaid(e: InputEvent) {
-
 		this.setState({ creditPaid: e.target.id })
 	}
 
@@ -130,7 +127,10 @@ export default class ItemInput extends React.Component {
 					     notices: e.target.notices.value ? e.target.notices.value : '',
 			  responsible_person: e.target.responsible_person.value ? e.target.responsible_person.value : '',
 		}
-		
+
+
+
+	
 		this.state.rows.map(row => 
 			entry.bill.items.push({
 				    'brand_name': e.target[     'brand_name' + row].value,
@@ -183,12 +183,10 @@ export default class ItemInput extends React.Component {
 				rows: prevState.rows.concat([prevState.rows.length + 1])
 			})
 		)
-
 		
 		const return_date = 'return_date' + (this.state.rows.length + 1)
 		this.setReturn_date[this.state.rows.length] = function (date) {
 			this.setState({ [return_date]: date })
-
 		}.bind(this)
 
 	}
@@ -265,9 +263,9 @@ export default class ItemInput extends React.Component {
 								<FormGroup controlId="date_of_rent">        
 									<ControlLabel>お貸出日</ControlLabel>
 									<DatePicker selected={this.state.date_of_rent}
-										name="date_of_rent"
-										value={this.state.date_of_rent}
-										onChange={(e) => this.DatehandleChange_date_of_rent(e)} />
+										            name="date_of_rent"
+												   value={this.state.date_of_rent}
+										        onChange={(e) => this.DatehandleChange_date_of_rent(e)} />
 								</FormGroup>
 							</Col>
 							
@@ -327,9 +325,9 @@ export default class ItemInput extends React.Component {
 									<ControlLabel>放送日・発売日</ControlLabel>
 									<br/>
 									<DatePicker selected={this.state.release_date}
-										name="release_date"
-										value={this.state.release_date}
-										onChange={(e) => this.DatehandleChange_release_date(e)} />
+										            name="release_date"
+										           value={this.state.release_date}
+										        onChange={(e) => this.DatehandleChange_release_date(e)} />
 								</Col>
 							</FormGroup>
 
@@ -357,9 +355,9 @@ export default class ItemInput extends React.Component {
 									<ControlLabel>一部返却日</ControlLabel>
 									<br/>
 									<DatePicker selected={this.state.return_date_part}
-										name="return_date_part"
-										value={this.state.return_date_part}
-										onChange={(e) => this.DatehandleChange_return_date_part(e)} />
+										            name="return_date_part"
+										           value={this.state.return_date_part}
+										        onChange={(e) => this.DatehandleChange_return_date_part(e)} />
 								</Col>
 							</FormGroup>
 
@@ -369,9 +367,9 @@ export default class ItemInput extends React.Component {
 									<ControlLabel>最終返却日</ControlLabel>
 									<br/>
 									<DatePicker selected={this.state.return_date_final}
-										name="return_date_final"
-										value={this.state.return_date_final}
-										onChange={(e) => this.DatehandleChange_return_date_final(e)} />
+										            name="return_date_final"
+										           value={this.state.return_date_final}
+										        onChange={(e) => this.DatehandleChange_return_date_final(e)} />
 								</Col>
 							</FormGroup>
 
@@ -471,7 +469,7 @@ export default class ItemInput extends React.Component {
 					</Col>  
 				</Row>				
 			</Grid>
-		)
+		)	
 	}
 }
 
