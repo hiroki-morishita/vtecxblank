@@ -9,9 +9,12 @@ import ReactDOM from 'react-dom'
 //import ItemInput from './demo_iteminput'
 //import ItemUpdate from './demo_itemupdate'
 
-import ListItems from './fermata_listitems'
-import ItemInput from './fermata_input'
+//import ListItems from './fermata_listitems'
+//import ItemInput from './fermata_input'
 import ItemUpdate from './fermata_update'
+
+import ItemInput from './oics_customerinput'
+import ListItems from './oics_customerList'
 
 import {
 	BrowserRouter as Router,

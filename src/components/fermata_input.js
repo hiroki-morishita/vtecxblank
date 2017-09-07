@@ -254,11 +254,11 @@ export default class ItemInput extends React.Component {
 					<Col sm={8} >					
 						<Form horizontal onSubmit={(e)=>this.handleSubmit(e)}>
 							<PageHeader>貸出伝票</PageHeader>
-							<Col xsOffset={8}
-								 smOffset={8}
-								 mdOffset={8}
-								 lgOffset={8}
-								 xlOffset={8}
+							<Col xsOffset={2}
+								 smOffset={2}
+								 mdOffset={2}
+								 lgOffset={2}
+								 xlOffset={2}
 								 xs={4}sm={4}md={4}lg={4}xl={4}>
 								<FormGroup controlId="date_of_rent">        
 									<ControlLabel>お貸出日</ControlLabel>

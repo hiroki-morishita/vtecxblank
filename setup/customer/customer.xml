@@ -1,0 +1,48 @@
+<feed>
+<entry>
+ <contributor>
+  <uri>urn:vte.cx:acl:/_group/$admin,CRUD</uri>
+ </contributor>
+<contributor>
+  <uri>urn:vte.cx:acl:+,CRUD</uri>
+</contributor>
+<link rel="self" href="/customer" />
+</entry>
+<entry>
+ <contributor>
+  <uri>urn:vte.cx:acl:/_group/$admin,CRUD</uri>
+ </contributor>
+<contributor>
+  <uri>urn:vte.cx:acl:+,CRUD</uri>
+</contributor>
+<link rel="self" href="/order" />
+</entry>
+<entry>
+ <contributor>
+  <uri>urn:vte.cx:acl:/_group/$admin,CRUD</uri>
+ </contributor>
+<contributor>
+  <uri>urn:vte.cx:acl:+,CRUD</uri>
+</contributor>
+<link rel="self" href="/items" />
+</entry>
+<entry>
+ <contributor>
+  <uri>urn:vte.cx:acl:/_group/$admin,CRUD</uri>
+ </contributor>
+<contributor>
+  <uri>urn:vte.cx:acl:+,CRUD</uri>
+</contributor>
+<link rel="self" href="/product" />
+</entry>
+<entry>
+ <contributor>
+  <uri>urn:vte.cx:acl:/_group/$admin,CRUD</uri>
+ </contributor>
+<contributor>
+  <uri>urn:vte.cx:acl:+,CRUD</uri>
+</contributor>
+<link rel="self" href="/stock" />
+</entry>
+</feed>
+

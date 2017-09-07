@@ -8,44 +8,102 @@
       <uri>urn:vte.cx:acl:+,R</uri>
     </contributor>
 <content type="text/html">
-userinfo
- id(int)
- email
-favorite
- food!=^.{3}$
- music=^.{5}$
-hobby{}
- type
- name
- updated(date)
-bill
- date_of_rent
- lender
- lender_tel
- publication
-  type
-  publisher_name
-  program_name
-  release_date
-  is_credit
-  prospective_user
-  return_date
-   part
-   final
-  other_notices 
- items{}
-  brand_name
-  item_no
-  item_name
-  usage_situation
-  return_date
- credit_paid
- return_completion
- notices
- responsible_person
+customer
+ customer_number
+ corporate_type(int)
+ customer_name
+ customer_name_kana
+ customer_tel1
+ customer_tel2
+ customer_fax 
+ department_name
+ customer_staff
+ person_in_charge
+ birthday
+ sex
+ email_address1
+ email_address2
+ fax
+ zip_code
+ prefecture
+ address1
+ address2
+ parent_customer_number
+account_info
+ billing_closing_date
+ date_of_payment
+ payment_month(int)
+ payment_method(int)
+ account_class(int)
+ account_number(int)
+order
+ order_date
+ order_number
+ order_class(int)
+ sales_branch
+ sales_staff
+ introducer
+ delivery_comment
+ shipment_comment
+ order_comments{}
+  comment
+ contact_method{}
+  contact_to
+  method
+ status
+items{}
+ supplier_code
+ product_code
+ shipment_number
+ is_rental(int)
+ tracking_number
+ setitem
+ color
+ size
+ futon_cover
+ makura_cover
+ unit_price(int)
+ quantity(int)
+ packing
+ offset
+ shipment_warehouse
+ shipment_class(int)
+ return_class(int)
+ return_flag(int)
+ article_class(int)
+ payment_method(int)
+ payment_date
+ product_exchange(int)
+ shipment_date
+ delivery_date
+ delivery_time
+ return_date
+ return_time
+ nights
+ contact_date
+ expected_date
+item
+ supplier_code
+ product_code
+ setitem
+ color
+ size
+ futon_cover
+ makura_cover
+ unit_price(int)
+stock
+ supplier_code
+ product_code
+ shipment_number
+ is_rental(int)
+ unit_price(int)
+ quantity
+ receipt_date
+ reservation_date
+ status
 </content>
 <rights>
-userinfo.id:/.+/registration
+customer.customer_number:/.+/customer
 </rights>
 </entry>
 </feed>
