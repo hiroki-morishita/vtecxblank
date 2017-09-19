@@ -38,7 +38,7 @@ export default class ListItems extends React.Component {
 					       isError: false,
 					        errmsg: '',
 					   isForbidden: false,
-					           url: '/d/customer?f&l=' + this.maxDisplayRows
+					           url: '/d/order?f&l=' + this.maxDisplayRows
 		}
 		this.activePage = 1
 	}
@@ -49,7 +49,7 @@ export default class ListItems extends React.Component {
 	}
   
 	search(condition:string) {
-		this.setState({ url: '/d/customer?f&l=' + this.maxDisplayRows + condition })
+		this.setState({ url: '/d/order?f&l=' + this.maxDisplayRows + condition })
 	}
    
 	getFeed(activePage:number) {
@@ -89,8 +89,8 @@ export default class ListItems extends React.Component {
 
 	onSelect(e:InputEvent) {
 		// 入力画面に遷移
-		const id = e.currentTarget.id.match(/^\/customer\/(.+),.*$/)
-		this.props.history.push('/customerupdate?' + id[1])
+		const id = e.currentTarget.id.match(/^\/order\/(.+),.*$/)
+		this.props.history.push('/orderupdate?' + id[1])
 		
 	}
 
@@ -98,20 +98,43 @@ export default class ListItems extends React.Component {
 		return(
 			<tr id={entry.id} key={key} onClick={(e)=>this.onSelect(e)}>
 				
-				<td>{entry.customer.customer_number}</td>
-				
-				{entry.customer.corporate_type === '1' &&
-					<td>個人</td>
-				}
-				
-				{entry.customer.corporate_type === '2' &&
-					<td>法人</td>
+				<td>{entry.order.order_date}</td>
+				<td>{entry.order.order_number}</td>
+
+				{entry.order.status === '1' &&
+					<td>受付</td>
 				}
 
-				<td>{entry.customer.customer_name}</td>
-				<td>{entry.customer.customer_tel1}</td>
-				<td>{entry.customer.customer_staff}</td>
-				<td>{entry.customer.email_address1}</td>
+				{entry.order.status === '2' &&
+					<td>確定</td>
+				}
+
+				{entry.order.status === '3' &&
+					<td>出荷指示</td>
+				}
+
+				{entry.order.status === '4' &&
+					<td>出荷済</td>
+				}
+
+				{entry.order.status === '5' &&
+					<td>配完</td>
+				}
+
+				{entry.order.status === '6' &&
+					<td>回収支持</td>
+				}
+
+				{entry.order.status === '7' &&
+					<td>回収済</td>
+				}
+
+				{entry.order.status === '8' &&
+					<td>回収完了</td>
+				}
+
+
+				
 			</tr>
 		)
 	}
@@ -147,17 +170,14 @@ export default class ListItems extends React.Component {
 						<Table striped bordered condensed hover className="table" >
 							<thead>
 								<tr>
-									<th>顧客コード</th>
-									<th>顧客区分</th>
-									<th>顧客名（漢字）姓、名</th>
-									<th>電話1</th>
-									<th>担当者</th>
-									<th>メールアドレス１</th>
+									<th>受注日</th>
+									<th>受注番号</th>
+									<th>ステータス</th>
 								</tr>
 							</thead>
 							<tbody>
 								{this.state.feed&&this.state.feed.entry.map((entry, idx) => 
-          	     					 entry.customer && entry.account_info && 
+          	     					 entry.order && entry.account_info && 
 														this.viewentry(((this.activePage-1)*this.maxDisplayRows)+idx + 1,entry,idx)
 								)
 								}

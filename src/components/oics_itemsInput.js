@@ -42,12 +42,7 @@ export default class ItemInput extends React.Component {
 	constructor(props:Props) {
 		super(props)
 		this.state = {
-			 			corporate_type: '',             //顧客区分（1:個人、2:法人)
-								   sex: '',             //性別
-				  billing_closing_date: moment(),		//請求締切日
-					   date_of_payment: moment(),		//支払日
-						 payment_month: '',             //支払月区分
-			            payment_method: '',
+			 			
 				           isCompleted: false,
 				               isError: false,
 				                errmsg: '',
@@ -122,6 +117,9 @@ export default class ItemInput extends React.Component {
 		}
 		
 		reqdata.feed.entry.push(entry)
+		console.log('reqdata.feed=' + JSON.stringify(reqdata.feed.entry))
+		//console.log('entry.customer=' + JSON.stringify(reqdata.entry.customer))
+		//console.log('entry.account_info='+JSON.stringify(reqdata.entry.account_info))
 
 		/*  for pagination test
 		for (let i = 1; i < 100; i++) {
@@ -139,8 +137,8 @@ export default class ItemInput extends React.Component {
 			},
 			data: {}
 		}).then((response) => {
+			console.log(JSON.stringify(response))
 			reqdata.feed.entry[0].customer.customer_number = ('000000' + response.data.feed.title).slice(-7)
-			reqdata.feed.entry[0].link = [{ '___href': '/customer/'+reqdata.feed.entry[0].customer.customer_number, '___rel': 'self' }]
 			
 			axios({
 				url: '/d/customer',

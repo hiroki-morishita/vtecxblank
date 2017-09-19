@@ -11,10 +11,19 @@ import ReactDOM from 'react-dom'
 
 //import ListItems from './fermata_listitems'
 //import ItemInput from './fermata_input'
-import ItemUpdate from './fermata_update'
+//import ItemUpdate from './fermata_update'
 
-import ItemInput from './oics_customerinput'
 import ListItems from './oics_customerList'
+import CustomerInput from './oics_customerinput'
+import ItemUpdate from './oics_customerupdate'
+
+//import ListItems from './oics_orderList'
+//import CustomerInput from './oics_orderInput'
+//import ItemUpdate from './oics_orderUpdate'
+
+//import ListItems from './oics_itemsList'
+//import CustomerInput from './oics_itemsInput'
+//import ItemUpdate from './oics_itemsUpdate'
 
 import {
 	BrowserRouter as Router,
@@ -50,15 +59,15 @@ class DemoContainer extends React.Component {
 	}
 	
 	
-	iteminput = () => {
+	customerinput = () => {
 		return (
-			<ItemInput 
+			<CustomerInput 
 				hideSidemenu={(e)=>this.hideSidemenu(e)} 
 			/>
 		)
 	}
 
-	itemupdate = () => {
+	customerupdate = () => {
 		return (
 			<ItemUpdate 
 				hideSidemenu={(e)=>this.hideSidemenu(e)} 
@@ -96,7 +105,7 @@ class DemoContainer extends React.Component {
 
 					<div id="sidebar-wrapper">
 						<ul className="sidebar-nav">
-							<li><Link to="/iteminput">入力</Link></li>
+							<li><Link to="/customerinput">入力</Link></li>
 							<li><Link to="/listitems">一覧</Link></li>
 							<li><a onClick={ () => this.logout() }>logout</a></li>
 						</ul>
@@ -104,12 +113,12 @@ class DemoContainer extends React.Component {
                         
 					<div id="page-content-wrapper">
 						<Switch>
-							<Route path="/iteminput" component={this.iteminput} />
+							<Route path="/customerinput" component={this.customerinput} />
 							<Route path="/listitems" component={this.listitems} />
-							<Route path="/itemupdate" component={this.itemupdate} />
+							<Route path="/customerupdate" component={this.customerupdate} />
 						</Switch>	
 					</div>    
-					<Redirect to='/iteminput' />
+					<Redirect to='/customerinput' />
 				</div>      
 			</Router>            
 		)

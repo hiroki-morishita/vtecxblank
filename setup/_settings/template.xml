@@ -10,7 +10,7 @@
 <content type="text/html">
 customer
  customer_number
- corporate_type(int)
+ corporate_type
  customer_name
  customer_name_kana
  customer_tel1
@@ -19,11 +19,12 @@ customer
  department_name
  customer_staff
  person_in_charge
- birthday
+ birthday_year
+ birthday_month
+ birthday_day
  sex
  email_address1
  email_address2
- fax
  zip_code
  prefecture
  address1
@@ -32,14 +33,14 @@ customer
 account_info
  billing_closing_date
  date_of_payment
- payment_month(int)
- payment_method(int)
- account_class(int)
- account_number(int)
+ payment_month
+ payment_method
+ account_class
+ account_number
 order
  order_date
  order_number
- order_class(int)
+ order_class
  sales_branch
  sales_staff
  introducer
@@ -47,6 +48,7 @@ order
  shipment_comment
  order_comments{}
   comment
+  comment_date
  contact_method{}
   contact_to
   method
@@ -55,25 +57,25 @@ items{}
  supplier_code
  product_code
  shipment_number
- is_rental(int)
+ is_rental
  tracking_number
  setitem
  color
  size
  futon_cover
  makura_cover
- unit_price(int)
- quantity(int)
+ unit_price
+ quantity
  packing
  offset
  shipment_warehouse
- shipment_class(int)
- return_class(int)
- return_flag(int)
- article_class(int)
- payment_method(int)
+ shipment_class
+ return_class
+ return_flag
+ article_class
+ payment_method
  payment_date
- product_exchange(int)
+ product_exchange
  shipment_date
  delivery_date
  delivery_time
@@ -82,7 +84,7 @@ items{}
  nights
  contact_date
  expected_date
-item
+product
  supplier_code
  product_code
  setitem
@@ -90,13 +92,13 @@ item
  size
  futon_cover
  makura_cover
- unit_price(int)
+ unit_price
 stock
  supplier_code
  product_code
  shipment_number
- is_rental(int)
- unit_price(int)
+ is_rental
+ unit_price
  quantity
  receipt_date
  reservation_date

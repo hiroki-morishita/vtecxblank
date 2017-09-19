@@ -95,6 +95,7 @@ export default class ListItems extends React.Component {
 	}
 
 	viewentry(idx: number, entry: any, key: string) {
+		console.log(JSON.stringify(entry))
 		return(
 			<tr id={entry.id} key={key} onClick={(e)=>this.onSelect(e)}>
 				
